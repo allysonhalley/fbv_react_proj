@@ -2,24 +2,140 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function Square(props) {
+function NodeSquareA(props) {
   return(
-    <button className="square" onClick={props.onClick}>
-      {props.value}
-    </button>
+      <button className="node-square" onClick={props.onClick}>
+        {props.value}
+        A
+      </button>
+  );
+}
+function NodeSquareB(props) {
+  return(
+      <button className="node-square" onClick={props.onClick}>
+        {props.value}
+        B
+      </button>
+  );
+}
+function NodeSquareC(props) {
+  return(
+      <button className="node-square" onClick={props.onClick}>
+        {props.value}
+        C
+      </button>
+  );
+}
+function NodeSquareD(props) {
+  return(
+      <button className="node-square" onClick={props.onClick}>
+        {props.value}
+        D
+      </button>
+  );
+}
+function NodeSquareE(props) {
+  return(
+      <button className="node-square" onClick={props.onClick}>
+        {props.value}
+        E
+      </button>
+  );
+}
+function WaySquareRight(props) {
+  return(
+      <button className="way-square" onClick={props.onClick}>
+        {props.value}
+        <i className="material-icons">arrow_forward</i>
+      </button>
+
+  );
+}
+function WaySquareDown(props) {
+  return(
+      <button className="way-square" onClick={props.onClick}>
+        {props.value}
+        <i className="material-icons">arrow_downward</i>
+      </button>
+
+  );
+}
+function WaySquareUp(props) {
+  return(
+      <button className="way-square" onClick={props.onClick}>
+        {props.value}
+        <i className="material-icons">arrow_upward</i>
+      </button>
+
   );
 }
 
-class Board extends React.Component {
-  renderSquare(i) {
-    return (
-      <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
 
+
+class Board extends React.Component {
+
+  renderSquare(i) {
+    if(i == 0 || i == 6 || i == 8 || i == 10) {
+      return (
+          <WaySquareRight
+              value={this.props.squares[i]}
+              onClick={() => this.props.onClick(i)}
+          />
+      );
+    }
+    if (i == 2){
+        return (
+            <WaySquareDown
+                value={this.props.squares[i]}
+                onClick={() => this.props.onClick(i)}
+            />
+        );
+    }
+    if (i == 12){
+      return (
+          <WaySquareUp
+              value={this.props.squares[i]}
+              onClick={() => this.props.onClick(i)}
+          />
+      );
+    }switch (i) {
+      case 1:
+        return (
+            <NodeSquareB
+                value={this.props.squares[i]}
+                onClick={() => this.props.onClick(i)}
+            />
+        );
+      case 5:
+        return (
+            <NodeSquareA
+                value={this.props.squares[i]}
+                onClick={() => this.props.onClick(i)}
+            />
+        );
+      case 7:
+        return (
+            <NodeSquareD
+                value={this.props.squares[i]}
+                onClick={() => this.props.onClick(i)}
+            />
+        );
+      case 9:
+        return (
+            <NodeSquareE
+                value={this.props.squares[i]}
+                onClick={() => this.props.onClick(i)}
+            />
+        );
+      case 11:
+        return (
+            <NodeSquareC
+                value={this.props.squares[i]}
+                onClick={() => this.props.onClick(i)}
+            />
+        );
+    }
+  }
   render() {    
     return (
       <div>
@@ -27,16 +143,23 @@ class Board extends React.Component {
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
           {this.renderSquare(3)}
           {this.renderSquare(4)}
-          {this.renderSquare(5)}
         </div>
         <div className="board-row">
+          {this.renderSquare(5)}
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
+          {this.renderSquare(9)}
+        </div>
+        <div className="board-row">
+
+          {this.renderSquare(10)}
+          {this.renderSquare(11)}
+          {this.renderSquare(12)}
+          {this.renderSquare(13)}
+          {this.renderSquare(14)}
         </div>
       </div>
     );
@@ -48,7 +171,7 @@ class Game extends React.Component {
     super(props);
     this.state = {      
       history: [{
-        squares: Array(9).fill(null),
+        squares: Array(11).fill(null),
       }],
       stepNumber: 0,
       xIsNext: true,
@@ -145,4 +268,10 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+function calculatorBestTime(squares){
+  const lines = [
+      []
+  ]
 }
